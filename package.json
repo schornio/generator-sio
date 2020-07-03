@@ -1,0 +1,81 @@
+{
+  "name": "generator-sio",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "https://www.schorn.io",
+  "author": {
+    "name": "Thomas Schorn",
+    "email": "thomas@schorn.io",
+    "url": "https://www.schorn.io"
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/app/index.js",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "devDependencies": {
+    "@types/yeoman-generator": "^3.1.4",
+    "eslint": "^6.8.0",
+    "husky": "^3.0.9",
+    "jest": "^24.8.0",
+    "lint-staged": "^9.4.3",
+    "prettier": "^1.19.1",
+    "yeoman-assert": "^3.1.0",
+    "yeoman-test": "^1.7.0"
+  },
+  "engines": {
+    "npm": ">= 4.0.0"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "chalk": "^2.1.0",
+    "typescript": "^3.9.5",
+    "yeoman-generator": "^2.0.1",
+    "yosay": "^2.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "xo",
+      "prettier"
+    ],
+    "env": {
+      "jest": true,
+      "node": true
+    },
+    "rules": {
+      "prettier/prettier": "error"
+    },
+    "plugins": [
+      "prettier"
+    ]
+  },
+  "scripts": {
+    "lint": "prettier  --config ./.prettierrc.json --check src/**/*.{ts,tsx} && eslint --no-error-on-unmatched-pattern src/**/*.{ts,tsx} && tsc --noEmit",
+    "pretest": "npm run lint",
+    "build": "tsc && cp -R src/app/templates generators/app/templates && cp -R src/app_material_ui/templates generators/app_material_ui/templates",
+    "test": "jest"
+  },
+  "repository": "schornio/generator-sio",
+  "license": "MIT"
+}
